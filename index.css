@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+
+/* ================= start global style ======================= */
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Otomanopee One', sans-serif;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+/* ===================== end global style ================== */
+
+.menu{
+    background:#000;
+    padding: 10px 10px;
+}
+
+.menu a{
+    padding: 10px;
+    background:#FFF;
+    color:black;
+    text-decoration: none;
+}
+
+
+.commande{
+    display:flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ================ start div with class commande_details  ====================== */
+.commande .commande_details {
+    flex-basis: 100%;
+}
+
+
+.commande .commande_details .recherche_product{
+    margin:10px 0;
+}
+
+.commande .commande_details .recherche_product form .form {
+    border:1px solid #ebedf3;
+    width:300px;
+    background: #ebedf3;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 10px;
+}
+
+.commande .commande_details .recherche_product form .form input[type="text"]{
+    outline-width: 0;
+    border:none;
+    width:270px;
+    background:#ebedf3;
+}
+
+.commande_details .products{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px 5px;
+}
+
+.commande_details .products .differents_products {
+    flex-basis:100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.commande_details .products .differents_products .one_product{
+    flex-basis:20%;
+    text-align: center;
+}
+
+.commande_details .products .differents_products .one_product button {
+    background:black;
+    border:1px solid black;
+    color:white;
+    cursor:pointer;
+    padding:5px 5px;
+    border-radius:10px;
+}
+
+.commande_details .products .differents_products .one_product button:hover{
+    background: white;
+    color:#000;
+}
+
+.commande .products .information_client{
+    padding:10px 10px;
+    margin-top: 24px;
+}
+.commande .products .information_client .form{
+    text-align: center;
+}
+
+.commande .products .information_client .form form{
+    margin-left: auto;
+    margin-right:auto;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+}
+
+
+.commande .products .information_client .form form .fields ,
+.commande .products .information_client .form form .buttons {
+    flex-basis: 100%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.commande .products .information_client .form form .fields input,
+.commande .products .information_client .form form .buttons input
+{
+    border-radius:10px;
+    border:1px solid #ebedf3;
+    padding: 10px 10px;
+    outline-width: 0;
+    background:#ebedf3;
+    margin: 4px 0;
+}
+
+.commande .products .information_client .form form .fields input {
+    flex-basis: 25%;
+}
+
+
+.commande .products .information_client .form form .fields input::placeholder{
+    font-style: italic;
+}
+
+.commande .products .information_client .form form .buttons input[type="reset"],
+.commande .products .information_client .form form .buttons input[type="submit"]
+{
+    background: white;
+    color:black;
+    border:1px solid black;
+}
+
+.commande .products .information_client .form form .buttons .button_add_product:hover{
+    border-color:white;
+    background: #000;
+    cursor:pointer;
+    color:#FFF;
+}
+
+/* ================== start div with class products_requested ============================ */
+.commande_details .products_requested{
+    margin-top:20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.commande_details .products_requested .table table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.commande_details .products_requested .table table thead tr {
+    background-color: #000;
+    color: #ffffff;
+    text-align: left;
+}
+
+.commande_details .products_requested .table table th , .commande_details .products_requested .table table td {
+    padding:12px 15px;
+}
+
+.commande_details .products_requested .table table td button {
+    border:1px solid black;
+    border-radius:10px;
+    cursor:pointer;
+    padding: 5px 5px;
+}
+
+.commande_details .products_requested .table table td button#add{
+    border:1px solid #437F2F;
+    background:white;
+    color:#437F2F;
+}
+
+.commande_details .products_requested .table table td button#del{
+    border:1px solid #FF2C41;
+    background:#FF2C41;
+    color:white;
+}
+
+.commande_details .products_requested .table table tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.commande_details .products_requested .table table tr:nth-of-type(even){
+    background-color:red;
+}
+
+.commande_details .products_requested .table table tr:last-of-type{
+    border-bottom: 1px solid #000;
+}
+
+.commande_details .products_requested button {
+    border:1px solid #437F2F;
+    border-radius:10px;
+    cursor:pointer;
+    padding: 20px 20px;
+    color:#437F2F;
+    background:white;
+}
+
+.commande_details .products_requested button:hover{
+    background:#437F2F;
+    color:white;
+}
+/* ================== start div with class products_requested ============================ */
+
+
+/* ================ end div with class commande_details  ====================== */
+
+/* ========================== start div with commande_facture ====================*/
+.commande .commande_facture{
+    flex-basis: 100%;
+    width:100%;
+    height: auto;
+    text-align: center;
+}
+
+.commande .commande_facture h5{
+    font-size: 45px;
+}
+
+.commande .commande_facture .form_facture {
+    flex-basis: 100%;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.commande .commande_facture .form_facture form {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-around;
+    border-bottom:2px solid black;
+    margin-bottom: 20px;
+}
+
+.commande .commande_facture .form_facture form input{
+    border-radius:10px;
+    border:1px solid #ebedf3;
+    padding: 10px 10px;
+    outline-width: 0;
+    background:#ebedf3;
+    margin: 4px 0;
+    flex-basis: 100%;
+    min-width: 200px;
+}
+
+.commande .commande_facture .form_facture form input::placeholder{
+    font-style: italic;
+}
+/* ================ end div with commande_facture  ====================== */
+
+
+/* =================== RESPONSIVITY ====================== */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .commande .commande_details{
+        background:green;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    /* .commande .commande_details{
+        background:pink;
+    } */
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    /* .commande .commande_details{
+        background:black;
+    } */
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    /* .commande .commande_details{
+        background:yellow;
+    } */
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    /* .commande .commande_details{
+        background:white;
+    } */
+}

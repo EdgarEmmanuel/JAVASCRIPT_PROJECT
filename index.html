@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+    <!-- start menu div -->
+    <div class="menu">
+        <a href="#commande">Commande</a>
+        <a href="#facture">Facture</a>
+    </div>
+    <!-- end menu div -->
+    <div class="commande">
+        <!-- start div commande_details-->
+        <div class="commande_details">
+            <!-- start div recherche_product-->
+            <div class="recherche_product">
+                    <form action="post">
+                        <div class="form">
+                            <input type="text" name="search" placeholder="search product..." />
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </form>
+            </div>
+            <!-- end div recherche_product-->
+            <!-- start products-->
+            <div class="products">
+                <div class="differents_products" id="commande">
+                    <div class="one_product">
+                        <div class="image">
+                            <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG6.png" alt="" />
+                        </div>
+                        <div class="informations">
+                            <h5>Article : 1</h5>
+                            <h5>Prix : 500 FCFA</h5>
+                            <h5>Stock : 2</h5>
+                        </div>
+                        <button id="1">Ajouter</button>
+                    </div>
+                    <div class="one_product">
+                        <div class="image">
+                            <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG6.png" alt="" />
+                        </div>
+                        <div class="informations">
+                            <h5>Article : 2</h5>
+                            <h5>Prix : 500 FCFA</h5>
+                            <h5>Stock : 2</h5>
+                        </div>
+                        <button id="2">Ajouter</button>
+                    </div>
+                    <div class="one_product">
+                        <div class="image">
+                            <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG6.png" alt="" />
+                        </div>
+                        <div class="informations">
+                            <h5>Article : 2</h5>
+                            <h5>Prix : 500 FCFA</h5>
+                            <h5>Stock : 2</h5>
+                        </div>
+                        <button id="2">Ajouter</button>
+                    </div>
+                    <div class="one_product">
+                        <div class="image">
+                            <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG6.png" alt="" />
+                        </div>
+                        <div class="informations">
+                            <h5>Article : 2</h5>
+                            <h5>Prix : 500 FCFA</h5>
+                            <h5>Stock : 2</h5>
+                        </div>
+                        <button id="2">Ajouter</button>
+                    </div>
+                    <div class="one_product">
+                        <div class="image">
+                            <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG6.png" alt="" />
+                        </div>
+                        <div class="informations">
+                            <h5>Article : 2</h5>
+                            <h5>Prix : 500 FCFA</h5>
+                            <h5>Stock : 2</h5>
+                        </div>
+                        <button id="2">Ajouter</button>
+                    </div>
+                </div>
+                <!-- start div information_client -->
+                <div class="information_client">
+                    <!-- start div form-->
+                    <div class="form">
+                        <h2>Informations du Client </h2>
+                        <!-- start form-->
+                        <form method="post">
+                            <!-- start div fields -->
+                            <div class="fields">
+                                <div class="form_group">
+                                    <input type="text" placeholder="nom" 
+                                    name="nom" required />
+                                </div>
+                                <div class="form_group">
+                                    <input type="text" placeholder="prenom" 
+                                    name="prenom" required />
+                                </div>
+                                <div class="form_group">
+                                    <input type="text" placeholder="adresse" 
+                                    name="adresse" required />
+                                </div>
+                                <div class="form_group">
+                                    <input type="number" placeholder="telephone" 
+                                    name="telephone" required />
+                                </div>
+                            </div>
+                            <!-- start div fields -->
+                            <!-- start div buttons -->
+                            <div class="buttons">
+                                <input class="button_add_product" type="submit" value="Enregistrer"/>
+                                <input class="button_add_product" type="reset" value="Annuler"/>
+                            </div>
+                            <!-- start div buttons -->
+                        </form>
+                        <!-- end form-->
+                    </div>
+                    <!-- start div form-->
+                </div>
+                <!-- end div information_client-->
+            </div>
+            <!-- end products-->
+            <!-- start div products_requested -->
+            <div class="products_requested">
+                <!-- start div table-->
+                <div class="table">
+                    <!-- start table-->
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Designation</td>
+                                <td>Prix</td>
+                                <td>Quantite</td>
+                                <td>Montant</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody id="all_products_request">
+                            <tr>
+                                <td>test</td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td>test</td>
+                                <td>
+                                    <button id="add">AJOUTER <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    <button id="del">ENLEVER <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- end table-->
+                </div>
+                <!-- end div table -->
+                <button id="valider_commande">VALIDER COMMANDE</button>
+            </div>
+            <!-- end div products_requested-->
+        </div>
+        <!-- end div commande_details-->
+
+        <svg xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 1440 320">
+        <path fill="#a2d9ff" fill-opacity="1" d="M0,128L17.1,144C34.3,160,69,192,103,192C137.1,192,171,160,206,133.3C240,107,274,85,309,90.7C342.9,96,377,128,411,154.7C445.7,181,480,203,514,181.3C548.6,160,583,96,617,106.7C651.4,117,686,203,720,224C754.3,245,789,203,823,170.7C857.1,139,891,117,926,144C960,171,994,245,1029,272C1062.9,299,1097,277,1131,256C1165.7,235,1200,213,1234,186.7C1268.6,160,1303,128,1337,112C1371.4,96,1406,96,1423,96L1440,96L1440,0L1422.9,0C1405.7,0,1371,0,1337,0C1302.9,0,1269,0,1234,0C1200,0,1166,0,1131,0C1097.1,0,1063,0,1029,0C994.3,0,960,0,926,0C891.4,0,857,0,823,0C788.6,0,754,0,720,0C685.7,0,651,0,617,0C582.9,0,549,0,514,0C480,0,446,0,411,0C377.1,0,343,0,309,0C274.3,0,240,0,206,0C171.4,0,137,0,103,0C68.6,0,34,0,17,0L0,0Z">
+        </path></svg>
+
+        <!-- start div commande_facture-->
+        <div class="commande_facture" id="facture">
+            <h5>GL - COMMERCIAL</h5>
+            <!-- start div form_facture-->
+            <div class="form_facture">
+                <!-- start form-->
+                <form action="" method="">
+                    <div class="form_group">
+                        <input type="text" placeholder="nom complet" 
+                        name="nom complet" value="DIOP" disabled/>
+                    </div>
+                    <div class="form_group">
+                      <input type="text" placeholder="adresse"
+                      name="adresse" value="Adresse : FASS" disabled/>
+                  </div>
+                  <div class="form_group">
+                      <input type="text" placeholder="telephone" 
+                      name="telephone" value="Telephone : 00221343454565" disabled/>
+                  </div>
+                  <!--<div class="buttons">
+                      <input type="submit" value="Enregistrer"/>
+                      <input type="reset" value="Annuler"/>
+                  </div> -->
+              </form>
+              <!-- end form-->
+              <!-- start div all_client_products-->
+              <div class="all_client_products">
+                
+              </div>
+              <!-- end div all_client_products-->
+            </div>
+            <!-- end div form_facture -->
+        </div>
+        <!-- end div commande_facture-->
+    </div>
+    
+
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
