@@ -28,6 +28,7 @@ let tableau = [
 let DIV_differents_products = document.querySelector(".differents_products");
 let DIV_one_product = document.querySelectorAll(".one_product");
 let TBODY_all_products_request = document.querySelector("#all_products_request");
+let FORM_submit_form = document.querySelector("#submit_form");
 
 class Produit{
     constructor(id,quantite,prix,nom_produit,stock,image_produit){
@@ -88,7 +89,6 @@ class UI {
                 <button id="del" class="del ${Produit.id}">ENLEVER <i class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
         `
-
         return tr;
     }
 
@@ -129,13 +129,62 @@ class UI {
         }
     }
 
+
+    static handleFormClient(){
+        FORM_submit_form.addEventListener("click",(e)=>{
+            // recuperation de tous les champs 
+            // de type **TEXT** 
+            // du formulaire 
+            let champsText = document
+                .querySelectorAll(".information_client .form form input[type='text']");
+
+                // recuperaytion de tous les champs 
+                // de type **NUMBER** 
+                // du formulaire 
+            let champsNumber = document
+                .querySelectorAll(".information_client .form form input[type='number']");
+
+            // le nombre de champs remplis dans le formulaire    
+            let NombreDeChampsTextRemplis = 0;    
+            for(let number=0;number<champsText.length;number++){
+                // si le champ est rempli 
+                // on incremente la variable
+                if(champsText[number].value.trim() !== ""){
+                    NombreDeChampsTextRemplis++;
+                }
+            }
+
+            let NombreDeChampNumberRemplis = 0;
+            for(let number=0;number<champsNumber.length;number++){
+                if(champsNumber[number].value){
+                    NombreDeChampNumberRemplis++;
+                }
+            }
+
+            // condition 
+            // verification si nombre de champ type[number] rempli 
+            // egal le nombre total de champ
+            // et 
+            // condition 
+            // verification si nombre de champ type[texte] rempli 
+            // egal le nombre total de champ
+            if(NombreDeChampNumberRemplis == champsNumber.length
+                &&
+                NombreDeChampsTextRemplis == champsText.length){
+                alert("tous les champs sont remplis")
+            }else{
+                alert("VEUILLEZ REMPLIR TOUS LES CHAMPS DU FORMULAIRE")
+            }
+
+        })
+    }
+
     static handleClickOneOnOneProductClass(){
         // recuperer tous les enfants de la div
        let children = document.querySelectorAll(".differents_products .product_details");
         
        // avoir le nombre d'enfants dans la div
        let longueurDesEnfants = children.length;
-
 
       for(let i=0;i<longueurDesEnfants;i++){
           children[i].addEventListener("click",UI.addProductInTheBasket);
@@ -146,3 +195,5 @@ class UI {
 UI.printProduct();
 
 UI.handleClickOneOnOneProductClass();
+
+UI.handleFormClient();
