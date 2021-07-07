@@ -206,7 +206,7 @@ img{
 }
 
 .commande_details .products_requested .table table tr:nth-of-type(even){
-    background-color:red;
+    background-color:rgb(100, 146, 47);
 }
 
 .commande_details .products_requested .table table tr:last-of-type{
