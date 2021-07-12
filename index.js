@@ -29,6 +29,7 @@ let DIV_differents_products = document.querySelector(".differents_products");
 let DIV_one_product = document.querySelectorAll(".one_product");
 let TBODY_all_products_request = document.querySelector("#all_products_request");
 let FORM_submit_form = document.querySelector("#submit_form");
+let BUTTON_valider_commande = document.querySelector("#valider_commande");
 
 class Produit{
     constructor(id,quantite,prix,nom_produit,stock,image_produit){
@@ -280,6 +281,74 @@ class UI {
           children[i].addEventListener("click",UI.addProductInTheBasket);
       }
     }
+
+    static validateUserCommand(){
+        BUTTON_valider_commande.addEventListener("click",(e)=>{
+            e.preventDefault();
+
+            // recuperer les elements dans le storage 
+            var theUser = JSON.parse(localStorage.getItem("users"));
+            var userProducts = JSON.parse(localStorage.getItem("panier"));
+
+            // associer l'utilisateur et ses 
+            // commandes 
+            let userCommand = {
+                "user" : theUser[0],
+                "produits" : userProducts
+            }
+
+            // creer un storage dynamique 
+            let command = [];
+            if(localStorage.getItem("commands")!==null){
+                let elements = JSON.parse(localStorage.getItem("commands"));
+                elements.push(userCommand);
+                localStorage.setItem("commands",JSON.stringify(elements));
+            }else{
+                command.push(userCommand);
+                localStorage.setItem("commands",JSON.stringify(command));
+            }
+
+            //empty the others storage 
+            localStorage.setItem("users",null);
+            localStorage.removeItem("users");
+            localStorage.setItem("panier",null);
+            localStorage.removeItem("panier");
+        })
+    }
+
+    static fillTheFinalForm(){
+        let fieldAdresse = document.querySelector("#final_adresse");
+        let fieldNomComplet = document.querySelector("#final_nomComplet");
+        let fieldTelephone = document.querySelector("#final_telephone");
+        let UL_all_clients_final_products = document.querySelector("#all_clients_final_products");
+        if(localStorage.getItem("commands")!==null && 
+        localStorage.getItem("commands") !== undefined){
+            let data = JSON.parse(localStorage.getItem("commands"));
+
+            // recuperer les informations du client
+            let user = data[0].user;
+            fieldAdresse.value = user.adresse;
+            fieldNomComplet.value = user.nom + " " + user.prenom;
+            fieldTelephone.value = user.telephone;
+
+            // recuperer ses produits
+            let products = data[0].produits;
+            products.forEach((product)=>{
+                console.log(product);
+                let li = document.createElement("li");
+                li.innerHTML= `
+                    <p>Nom : ${product.nom_produit}</p>
+                    <p>Prix U. : ${product.prix}</p>
+                    <p>Quantite : ${product.quantite}</p>
+                    <hr/>
+                `
+                UL_all_clients_final_products.appendChild(li);
+            });
+
+            
+        }
+        
+    }
 }
 
 UI.printProduct();
@@ -289,3 +358,7 @@ UI.handleClickOneOnOneProductClass();
 UI.handleFormClient();
 
 UI.renderInTheTable();
+
+UI.validateUserCommand();
+
+UI.fillTheFinalForm();

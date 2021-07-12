@@ -116,15 +116,15 @@
                 <form action="" method="">
                     <div class="form_group">
                         <input type="text" placeholder="nom complet" 
-                        name="nom complet" value="DIOP" disabled/>
+                        name="nom complet" id="final_nomComplet" value="DIOP" disabled/>
                     </div>
                     <div class="form_group">
                       <input type="text" placeholder="adresse"
-                      name="adresse" value="Adresse : FASS" disabled/>
+                      name="adresse" id="final_adresse" value="Adresse : FASS" disabled/>
                   </div>
                   <div class="form_group">
                       <input type="text" placeholder="telephone" 
-                      name="telephone" value="Telephone : 00221343454565" disabled/>
+                      name="telephone" id="final_telephone" value="Telephone : 00221343454565" disabled/>
                   </div>
                   <!--<div class="buttons">
                       <input type="submit" value="Enregistrer"/>
@@ -134,7 +134,9 @@
               <!-- end form-->
               <!-- start div all_client_products-->
               <div class="all_client_products">
-                
+                <ul id="all_clients_final_products">
+
+                </ul>
               </div>
               <!-- end div all_client_products-->
             </div>
