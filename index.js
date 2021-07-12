@@ -49,6 +49,23 @@ class Produit{
     }
 }
 
+
+class User {
+    constructor(nom,prenom,adresse,telephone){
+        this.nom = nom;
+        this.prenom = prenom ;
+        this.adresse = adresse ;
+        this.telephone = telephone;
+    }
+
+    static fromDataToProduit(item){
+        return new User(
+            item.nom,
+            item.prenom,item.adresse,item.telephone
+            );
+    }
+}
+
 class Helper {
     static findProduitById(id){
         let POSITION = 0;
@@ -105,6 +122,42 @@ class UI {
         })
     }
 
+    static addCommandInStorage(element=null){
+        let items =  []
+        if(localStorage.getItem("panier")!==null){
+            let elements = JSON.parse(localStorage.getItem("panier"));
+            elements.push(element);
+            localStorage.setItem("panier",JSON.stringify(elements));
+        }else {
+            items.push(element)
+            //console.log(items);
+            localStorage.setItem("panier",JSON.stringify(items));
+        }
+    }
+
+    static getElementFromStorage(){
+        if(localStorage.getItem("panier")!==null){
+            return JSON.parse(localStorage.getItem("panier"));
+        }else {
+            return [];
+        }
+    }
+
+
+    static renderInTheTable(){
+        let allProducts = UI.getElementFromStorage();
+
+            for(let element=0;element<allProducts.length;element++){
+
+                // creer une ligne **tr** HTML
+            let one_row = UI.createOneTrRowInTheTable(allProducts[element]);
+
+            // ajouter la ligne dans le tableau
+            TBODY_all_products_request.appendChild(one_row);
+
+            }
+    }
+
     static addProductInTheBasket(e){
         e.preventDefault();
         let POSITION_OF_ID = 1;
@@ -119,19 +172,43 @@ class UI {
         if(data !== null){
             let produit = Produit.fromDataToProduit(data);
 
-            // creer une ligne **tr** HTML
-            let one_row = UI.createOneTrRowInTheTable(produit);
+            // ajouter les elements dynamiquement
+            UI.addCommandInStorage(produit);
 
-            // ajouter la ligne dans le tableau
-            TBODY_all_products_request.appendChild(one_row);
+            // recuperer tous les elements du store;
+
+            UI.renderInTheTable();
+
+            
         }else{
             alert("ID INTROUVABLE");
         }
     }
 
+    static addUserInStorage(user){
+        let users = [];
+        if(localStorage.getItem("users")!==null){
+            let elements = JSON.parse(localStorage.getItem("users"));
+            elements.push(user);
+            localStorage.setItem("users",JSON.stringify(users))
+        }else{
+            users.push(user);
+            localStorage.setItem("users",JSON.stringify(users));
+        }
+    }
+
+
+    static clearTheForm(){
+        document.querySelector("#nom").value = "";
+        document.querySelector("#prenom").value="";
+        document.querySelector("#adresse").value="";
+        document.querySelector("#telephone").value="";
+    }
+
 
     static handleFormClient(){
         FORM_submit_form.addEventListener("click",(e)=>{
+            e.preventDefault();
             // recuperation de tous les champs 
             // de type **TEXT** 
             // du formulaire 
@@ -171,7 +248,20 @@ class UI {
             if(NombreDeChampNumberRemplis == champsNumber.length
                 &&
                 NombreDeChampsTextRemplis == champsText.length){
-                alert("tous les champs sont remplis")
+
+                    let nom = document.querySelector("#nom").value
+                    let prenom = document.querySelector("#prenom").value;
+                    let adresse = document.querySelector("#adresse").value;
+                    let telephone = document.querySelector("#telephone").value;
+
+                    let user = new User(nom,prenom,adresse,telephone);
+
+                    // add user in storage
+                    UI.addUserInStorage(user)
+
+                    // vider les champs du formulaire
+                    UI.clearTheForm();
+               
             }else{
                 alert("VEUILLEZ REMPLIR TOUS LES CHAMPS DU FORMULAIRE")
             }
@@ -197,3 +287,5 @@ UI.printProduct();
 UI.handleClickOneOnOneProductClass();
 
 UI.handleFormClient();
+
+UI.renderInTheTable();
