@@ -321,6 +321,7 @@ class UI {
         let fieldNomComplet = document.querySelector("#final_nomComplet");
         let fieldTelephone = document.querySelector("#final_telephone");
         let UL_all_clients_final_products = document.querySelector("#all_clients_final_products");
+        let FIELD_montant_final = document.querySelector("#montant_final");
         if(localStorage.getItem("commands")!==null && 
         localStorage.getItem("commands") !== undefined){
             let data = JSON.parse(localStorage.getItem("commands"));
@@ -333,18 +334,28 @@ class UI {
 
             // recuperer ses produits
             let products = data[0].produits;
+            let montantTotal = 0
             products.forEach((product)=>{
-                console.log(product);
+                // creer un element HTML li 
                 let li = document.createElement("li");
+
+                // mettre du contenu html dans notre balise li 
                 li.innerHTML= `
                     <p>Nom : ${product.nom_produit}</p>
                     <p>Prix U. : ${product.prix}</p>
                     <p>Quantite : ${product.quantite}</p>
                     <hr/>
                 `
+
+                // ajouter l'element a la mere UL 
                 UL_all_clients_final_products.appendChild(li);
+
+                // calculer le montant total 
+                montantTotal+= (product.prix * product.quantite);
             });
 
+            // calculer le montant de la commande 
+            FIELD_montant_final.value =`TOTAL : ${montantTotal} FCFA`;
             
         }
         
