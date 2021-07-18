@@ -30,6 +30,7 @@ let DIV_one_product = document.querySelectorAll(".one_product");
 let TBODY_all_products_request = document.querySelector("#all_products_request");
 let FORM_submit_form = document.querySelector("#submit_form");
 let BUTTON_valider_commande = document.querySelector("#valider_commande");
+let BUTTON_vider_commande = document.querySelector("#vider_commande");
 
 class Produit{
     constructor(id,quantite,prix,nom_produit,stock,image_produit){
@@ -133,7 +134,6 @@ class UI {
     }
 
     
-
     static printProduct(){
         tableau.forEach((element)=>{
             // transformer un element en classe Produit
@@ -321,32 +321,47 @@ class UI {
             e.preventDefault();
 
             // recuperer les elements dans le storage 
-            var theUser = JSON.parse(localStorage.getItem("users"));
-            var userProducts = JSON.parse(localStorage.getItem("panier"));
+            var theUser = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [];
+            var userProducts = UI .getElementFromStorage();
 
-            // associer l'utilisateur et ses 
-            // commandes 
-            let userCommand = {
-                "user" : theUser[0],
-                "produits" : userProducts
+            if (theUser.length > 0 ){
+
+                if(userProducts.length > 0){
+
+
+                    // associer l'utilisateur et ses 
+                    // commandes 
+                    let userCommand = {
+                        "user" : theUser[0],
+                        "produits" : userProducts
+                    }
+
+                    // creer un storage dynamique 
+                    let command = [];
+                    if(localStorage.getItem("commands")!==null){
+                        let elements = JSON.parse(localStorage.getItem("commands"));
+                        elements.push(userCommand);
+                        localStorage.setItem("commands",JSON.stringify(elements));
+                    }else{
+                        command.push(userCommand);
+                        localStorage.setItem("commands",JSON.stringify(command));
+                    }
+
+                    //empty the others storage 
+                    localStorage.setItem("users",null);
+                    localStorage.removeItem("users");
+                    localStorage.setItem("panier",null);
+                    localStorage.removeItem("panier");
+
+                    // reload the page 
+                    location.reload();
+                } else {
+                    alert("Vous devez Ajouter des produits dans le panier");
+                }
+                
+            } else {
+                alert("Vous devez creer un utilisateur ");
             }
-
-            // creer un storage dynamique 
-            let command = [];
-            if(localStorage.getItem("commands")!==null){
-                let elements = JSON.parse(localStorage.getItem("commands"));
-                elements.push(userCommand);
-                localStorage.setItem("commands",JSON.stringify(elements));
-            }else{
-                command.push(userCommand);
-                localStorage.setItem("commands",JSON.stringify(command));
-            }
-
-            //empty the others storage 
-            localStorage.setItem("users",null);
-            localStorage.removeItem("users");
-            localStorage.setItem("panier",null);
-            localStorage.removeItem("panier");
         })
     }
 
@@ -394,18 +409,31 @@ class UI {
         }
         
     }
+
+    static viderAllCommande(){
+        BUTTON_vider_commande.addEventListener("click",(e) => {
+            e.preventDefault();
+            // vider le storage de commande
+            localStorage.removeItem("commands");
+
+            // reload la page 
+            location.reload();
+        })
+    }
 }
 
 UI.printProduct();
 
 UI.handleClickOneOnOneProductClass();
 
-//UI.handleFormClient();
+UI.handleFormClient();
 
 UI.renderInTheTable();
 
-//UI.validateUserCommand();
+UI.validateUserCommand();
 
-//UI.fillTheFinalForm();
+UI.fillTheFinalForm();
 
 UI.deleteElementOfStorage();
+
+UI.viderAllCommande();
