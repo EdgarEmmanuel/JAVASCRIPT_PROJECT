@@ -1,3 +1,11 @@
+iziToast.settings({
+    timeout: 10000,
+    resetOnHover: true,
+    icon: 'material-icons',
+    transitionIn: 'flipInX',
+    transitionOut: 'flipOutX',
+});
+
 let tableau = [
     {
         id:1,
@@ -213,8 +221,6 @@ class UI {
             UI.renderInTheTable();
 
             location.reload();
-
-            
         }else{
             alert("ID INTROUVABLE");
         }
@@ -230,6 +236,11 @@ class UI {
             users.push(user);
             localStorage.setItem("users",JSON.stringify(users));
         }
+        // message de notification
+        iziToast.success({
+            title: 'Utilisateur',
+            message: 'Utilisateur cree avec Success ',
+        });
     }
 
 
@@ -356,11 +367,16 @@ class UI {
                     // reload the page 
                     location.reload();
                 } else {
-                    alert("Vous devez Ajouter des produits dans le panier");
+                    iziToast.error({
+                        title: 'OK',
+                        message: 'Vous devez Ajouter des produits dans le panier',
+                    });
                 }
-                
             } else {
-                alert("Vous devez creer un utilisateur ");
+                iziToast.error({
+                    title: 'OK',
+                    message: 'Vous devez Creer une Utilisateur ',
+                });
             }
         })
     }
