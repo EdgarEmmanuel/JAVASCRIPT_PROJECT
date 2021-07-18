@@ -307,9 +307,17 @@ class UI {
 
                     // vider les champs du formulaire
                     UI.clearTheForm();
+
+                    iziToast.success({
+                        title: 'Formulaire',
+                        message: 'Utilisateur Cree avec Success',
+                    });
                
             }else{
-                alert("VEUILLEZ REMPLIR TOUS LES CHAMPS DU FORMULAIRE")
+                iziToast.error({
+                    title: 'Formulaire',
+                    message: 'VEUILLEZ REMPLIR TOUS LES CHAMPS DU FORMULAIRE',
+                });
             }
 
         })
