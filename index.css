@@ -76,7 +76,9 @@ img{
 .commande_details .products .differents_products .one_product{
     flex-basis:20%;
     text-align: center;
+    margin:0 10px;
 }
+
 
 .commande_details .products .differents_products .one_product button {
     background:black;
@@ -280,9 +282,9 @@ img{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .commande .commande_details{
+    /* .commande .commande_details{
         background:green;
-    }
+    } */
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

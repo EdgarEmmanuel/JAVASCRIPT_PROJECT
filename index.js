@@ -2,7 +2,7 @@ let tableau = [
     {
         id:1,
         image_produit:"https://back.femininbio.com/attachments/2020/11/20/landscape/w800/11065-banane.jpg",
-        quantite:2,
+        quantite:1,
         prix:10000,
         nom_produit:"banane",
         stock:200
@@ -10,7 +10,7 @@ let tableau = [
     {
         id:2,
         image_produit:"https://media.istockphoto.com/photos/orange-picture-id185284489?k=6&m=185284489&s=612x612&w=0&h=x_w4oMnanMTQ5KtSNjSNDdiVaSrlxM4om-3PQTIzFaY=",
-        quantite:2,
+        quantite:1,
         prix:10000,
         nom_produit:"orange",
         stock:120
@@ -18,7 +18,7 @@ let tableau = [
     {
         id:3,
         image_produit:"https://vergerpelanne.com/wp-content/uploads/2017/06/pomme-anaglo.jpg",
-        quantite:2,
+        quantite:1,
         prix:10000,
         nom_produit:"pomme",
         stock:100
@@ -87,6 +87,7 @@ class UI {
             <h5>Article : ${Produit.nom_produit}</h5>
             <h5>Prix : ${Produit.prix} FCFA</h5>
             <h5>Stock : ${Produit.stock}</h5>
+            <h5>Quantite : ${Produit.quantite}</h5>
         </div>
         <button id="${Produit.id}" class="product_details ${Produit.id}">Ajouter</button>
         `;
@@ -103,12 +104,35 @@ class UI {
             <td>${Produit.prix}</td>
             <td>${Produit.quantite}</td>
             <td>
-                <button id="add" class="add ${Produit.id}">AJOUTER <i class="fa fa-plus" aria-hidden="true"></i></button>
                 <button id="del" class="del ${Produit.id}">ENLEVER <i class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
         `
         return tr;
     }
+
+    static deleteElementOfStorage(){
+        let enfants = document.querySelectorAll(".table #del");
+        let longueurEnfants = enfants.length;
+
+        for(let position=0;position<longueurEnfants;position++){
+            enfants[position].addEventListener("click", UI.removeOneElementOfStorage);
+        }
+    }
+
+    static removeOneElementOfStorage(e){
+        let POSITION_OF_ID = 1;
+        let theIdOfTheElement = e.target.classList[POSITION_OF_ID]
+        
+        // 1 - supprimer du storage
+        let panier = UI.getElementFromStorage();
+        let filteredPanier = panier.filter((element) => element.id != theIdOfTheElement);
+        localStorage.setItem("panier",JSON.stringify(filteredPanier));
+
+        // 2 - reload la page 
+        location.reload();
+    }
+
+    
 
     static printProduct(){
         tableau.forEach((element)=>{
@@ -124,15 +148,24 @@ class UI {
     }
 
     static addCommandInStorage(element=null){
-        let items =  []
-        if(localStorage.getItem("panier")!==null){
-            let elements = JSON.parse(localStorage.getItem("panier"));
-            elements.push(element);
-            localStorage.setItem("panier",JSON.stringify(elements));
-        }else {
-            items.push(element)
-            //console.log(items);
-            localStorage.setItem("panier",JSON.stringify(items));
+        let array = localStorage.getItem("panier") ? JSON.parse(localStorage.getItem("panier")) : [];
+
+        // verification the la presence de l'id dans le tableau 
+        let theDataExist = array.find((data) => data.id === element.id);
+
+        if(theDataExist === undefined) { 
+            // si NON : on ajoute le produit dans le storage 
+            array.push(element);
+            localStorage.setItem("panier",JSON.stringify(array));
+        } else { 
+            // si OUI on augmente la quantite du produit dans le storage 
+            let final_array = array.map((data)=>{
+                if(data.id == element.id){
+                    data.quantite +=1 ;
+                }
+                return data;
+            })
+            localStorage.setItem("panier",JSON.stringify(final_array));
         }
     }
 
@@ -168,8 +201,8 @@ class UI {
 
         // recuperer l'element trouve
         let data = Helper.findProduitById(idOfClickedElement);
-        
-        // verification si le resultat est different de NULL
+
+        //verification si le resultat est different de NULL
         if(data !== null){
             let produit = Produit.fromDataToProduit(data);
 
@@ -177,8 +210,9 @@ class UI {
             UI.addCommandInStorage(produit);
 
             // recuperer tous les elements du store;
-
             UI.renderInTheTable();
+
+            location.reload();
 
             
         }else{
@@ -366,10 +400,12 @@ UI.printProduct();
 
 UI.handleClickOneOnOneProductClass();
 
-UI.handleFormClient();
+//UI.handleFormClient();
 
 UI.renderInTheTable();
 
-UI.validateUserCommand();
+//UI.validateUserCommand();
 
-UI.fillTheFinalForm();
+//UI.fillTheFinalForm();
+
+UI.deleteElementOfStorage();
